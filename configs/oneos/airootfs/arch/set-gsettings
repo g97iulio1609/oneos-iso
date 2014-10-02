@@ -1,0 +1,13 @@
+[org.gnome.shell]
+favorite-apps=[ 'google-chrome.desktop', 'geary.desktop', 'empathy.desktop', 'gnome-music.desktop', 'totem.desktop', 'gnome-photos', 'libreoffice-startcenter.desktop', 'nautilus.desktop' ]
+enabled-extensions=['dock@infinity.org', 'launcher@infinity.org', 'workspaces@infinity.org', 'smartcontrol@infinityos.org', 'hide@infinity.org', 'animation@infinity.org', 'suspend-button@infinity.org' ]
+[org.gnome.desktop.interface]
+gtk-theme='InfinityUI'
+scaling-factor=1
+text-scaling-factor=1.0
+icon-theme='InfinityOS-Circle'
+[org.gnome.desktop.wm.preferences]
+button-layout=':minimize,maximize,close'
+theme='InfinityUI'
+[org.gnome.desktop.background]
+picture-uri='file:///usr/share/backgrounds/oneos-default-settings.jpg'

@@ -2,8 +2,8 @@
 
 set -e -u
 
-iso_name=archlinux
-iso_label="ARCH_$(date +%Y%m)"
+iso_name=OneOS
+iso_label="OneOS_$(date +%Y%m)"
 iso_version=$(date +%Y.%m.%d)
 install_dir=arch
 work_dir=work
@@ -51,15 +51,15 @@ make_pacman_conf() {
     sed -r "s|^#?\\s*CacheDir.+|CacheDir = $(echo -n ${_cache_dirs[@]})|g" ${script_path}/pacman.conf > ${pacman_conf}
 }
 
-# Base installation, plus needed packages (airootfs)
+## Base installation, plus needed packages (airootfs)
 make_basefs() {
-    setarch ${arch} mkarchiso ${verbose} -w "${work_dir}/${arch}" -C "${pacman_conf}" -D "${install_dir}" init
-    setarch ${arch} mkarchiso ${verbose} -w "${work_dir}/${arch}" -C "${pacman_conf}" -D "${install_dir}" -p "memtest86+ mkinitcpio-nfs-utils nbd" install
+    setarch ${arch} mkarchiso ${verbose} -w "${work_dir}/${arch}" -C "${pacman_conf}" -D "${install_dir}  " init
+    setarch ${arch} mkarchiso ${verbose} -w "${work_dir}/${arch}" -C "${pacman_conf}" -D "${install_dir}  " -p "memtest86+ mkinitcpio-nfs-utils nbd" install
 }
 
 # Additional packages (airootfs)
 make_packages() {
-    setarch ${arch} mkarchiso ${verbose} -w "${work_dir}/${arch}" -C "${pacman_conf}" -D "${install_dir}" -p "$(grep -h -v ^# ${script_path}/packages.{both,${arch}})" install
+    setarch ${arch} mkarchiso ${verbose} -w "${work_dir}/${arch}" -C "${pacman_conf}" -D "${install_dir}" -p "$(grep -h -v ^# ${script_path}/packages.{both,${arch}}) --force " install
 }
 
 # Copy mkinitcpio archiso hooks and build initramfs (airootfs)
@@ -228,14 +228,14 @@ mkdir -p ${work_dir}
 run_once make_pacman_conf
 
 # Do all stuff for each airootfs
-for arch in i686 x86_64; do
+for arch in x86_64; do
     run_once make_basefs
     run_once make_packages
     run_once make_setup_mkinitcpio
     run_once make_customize_airootfs
 done
 
-for arch in i686 x86_64; do
+for arch in  x86_64; do
     run_once make_boot
 done
 
@@ -246,8 +246,8 @@ run_once make_isolinux
 run_once make_efi
 run_once make_efiboot
 
-for arch in i686 x86_64; do
-    run_once make_prepare
+for arch in x86_64; do
+ make_prepare
 done
 
-run_once make_iso
+ make_iso
