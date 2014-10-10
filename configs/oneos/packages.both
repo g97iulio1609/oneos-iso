@@ -184,21 +184,27 @@ ttf-inconsolata
 ttf-indic-otf
 ttf-liberation
 
-## Network
-dhcp
-b43-fwcutter
-dhclient
-dnsmasq
-iptables
+# Network
+
 ipw2100-fw
 ipw2200-fw
-mobile-broadband-provider-info
-modemmanager
-nbd
-usb_modeswitch
-wpa_actiond
-wpa_supplicant
 zd1211-firmware
+wireless_tools
+wpa_actiond
+b43-fwcutter
+#broadcom-wl
+net-tools
+usb_modeswitch
+modemmanager
+networkmanager-openvpn
+networkmanager-pptp
+whois 
+dnsutils
+netctl
+wget
+linux-firmware
+intel-ucode
+
 
 ## Laptop power management
 acpid
